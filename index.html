@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script>
+        controller = {
+            obterObjDespesas:function(){
+                let data  = document.getElementById("data").value;
+                let desc  = document.getElementById("desc").value;
+                let tipo  = document.getElementById("tipo").value;
+                let strValor = (document.getElementById("valor").value).replace(",",".");
+                let valor = parseFloat(strValor);
+                return {data,desc,tipo,valor};
+            },
+            exibirDados: function(dados){
+                
+
+            }, 
+            limparCampos: function(){
+                document.getElementById("data").value="";
+                document.getElementById("desc").value="";
+                document.getElementById("valor").value="";
+
+            }
+        };
+
+        let entradas = [];
+        let saidas = []; 
+        
+        function cadastrar(){
+            
+            
+            let objDespesas = controller.obterObjDespesas();
+
+            if (objDespesas.data==""||objDespesas.desc==""||isNaN(objDespesas.valor)||objDespesas.valor==0) {
+            alert("Todos os campos são obrigatórios");
+            return false;
+            }
+            //console.log(objDespesas);
+            if(objDespesas.tipo=="e"){
+                entradas.push(objDespesas);
+            }else{
+                saidas.push(objDespesas);
+            }
+
+            
+            controller.limparCampos();         
+        };
+        
+        
+        function mostrar(valEntSaida){
+            let operacao = "";
+            var titulo="";
+            if (valEntSaida=="saida") {
+                operacao=saidas;
+                titulo = "Valores das Saidas ";
+            }else if (valEntSaida=="entrada") {
+                operacao=entradas;
+                titulo = "Valores das Entradas ";
+            }else if (valorEntSaida=="tudo") {
+                operacao = "todos";
+            }
+            
+            let strDivResultado="";
+            let strLinhas = "";
+            let soma = 0;   
+            let contTotal = operacao.length;
+            let cont = 1;
+            
+            
+            //console.log(total);
+            
+            operacao.forEach(dado => {
+                //console.log("entradas : " + dadoEntrada.desc);    
+                soma += dado.valor;
+                
+                strLinhas += `
+                
+                <tr>
+                    <td>${dado.data}</td><td>${dado.desc}</td><td>${dado.valor}</td>                    
+                </tr>
+                
+                `
+                if(cont==contTotal){
+                    strLinhas += `
+                
+                <tr>
+                    <td></td><td>Total</td><td><b>${soma}</b></td>                    
+                </tr>
+                
+                `
+
+                }
+                cont++;
+            });
+
+            strDivResultado = `
+            <div class="container center col-md-8 col-sm-12 mt-3">    
+                <center>${titulo}</center><br>
+                <table class="table table-striped table-bordered" id="tabela">
+                    <tr class="table-primary">
+                        <th>Data</th><th>Descrição</th><th>Valor</th>
+                    </tr>
+                    <tb id="linhas">
+                        `+
+                        strLinhas
+                        +`
+                        
+                    </tb>
+
+                </table>
+                
+  
+            </div>
+            `;
+            
+            
+            
+            //document.querySelector('#linhas').innerHTML = strLinhas;
+            if (entradas.length>0 || saidas.length>0) {
+                document.getElementById("tabResultado").innerHTML = strDivResultado;    
+            }
+            
+            
+                        
+        };
+
+    </script>
+
+    <title>Despesas Pessoais</title>
+</head>
+<body>
+    
+    <div class="container center col-md-8 col-sm-12 mt-3">    
+            <center><h3>Despesas Pessoais</h3></center>
+            <hr>    
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input class="form-control"type="text" id="data" placeholder="Digite a data ">
+            </div>
+            <div class="form-group">
+                <label for="desc">Descrição</label>
+                <input class="form-control" type="text" id="desc" placeholder="Digite a Descrição da movimentação">
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo de movimentação</label>
+                <select class="form-control" name="tipo" id="tipo">
+                    <option value="e">Entrada</option>
+                    <option value="s">Saída</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input class="form-control" type="text" id="valor" placeholder="digite o valor da movimentação">
+            </div>            
+            <div class=" col form-group col-sm-12 align-justify">
+                <button class="btn btn-success " onclick="cadastrar()">Cadastrar</button>
+                <button class="btn btn-primary" onclick="mostrar('entrada')">Listar Entradas</button>
+                <button class="btn btn-primary" onclick="mostrar('saida')">Listar Saídas</button>                
+            </div>  
+    </div>
+    <div class="container" id="tabResultado">
+        
+
+    </div>
+       
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
