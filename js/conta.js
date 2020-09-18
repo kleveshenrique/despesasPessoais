@@ -157,7 +157,7 @@ class ControllerConta {
 
         strDivResultado = `
         <div class="container center col-md-8 col-sm-12 mt-3">    
-            <center>${titulo}</center><br>
+            <center class="alert alert-primary">${titulo}</center><br>
             <table class="table table-striped table-bordered" id="tabela">
                 <tr class="table-primary">
                     <th>Data</th><th>Descrição</th>><th>Tipo</th><th>Valor</th>
