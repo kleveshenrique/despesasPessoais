@@ -4,162 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script>
-        controller = {
-            obterObjDespesas:function(){
-                let data  = document.getElementById("data").value;
-                let desc  = document.getElementById("desc").value;
-                let tipo  = document.getElementById("tipo").value;
-                let strValor = (document.getElementById("valor").value).replace(",",".");
-                let valor = parseFloat(strValor);
-                return {data,desc,tipo,valor};
-            },
-            exibirDados: function(dados){
-                
-
-            }, 
-            limparCampos: function(){
-                document.getElementById("data").value="";
-                document.getElementById("desc").value="";
-                document.getElementById("valor").value="";
-
-            }
-        };
-
-        let entradas = [];
-        let saidas = [];
-        let todos =[]; 
-        
-        function cadastrar(){
-            
-            
-            let objDespesas = controller.obterObjDespesas();
-
-            if (objDespesas.data==""||objDespesas.desc==""||isNaN(objDespesas.valor)||objDespesas.valor==0) {
-            alert("Todos os campos são obrigatórios");
-            return false;
-            }
-            //console.log(objDespesas);
-            if(objDespesas.tipo=="e"){
-                entradas.push(objDespesas);
-            }else{
-                saidas.push(objDespesas);
-            }
-
-            
-            controller.limparCampos();         
-        };
-        function RedirecionarUrl(url){
-               // console.log(url);
-               window.location.href= url;
-
-        };
-        
-        
-        function mostrar(valEntSaida){
-            let operacao = "";
-            var titulo="";
-            if (valEntSaida=="saida") {
-                operacao=saidas;
-                titulo = "Valores das Saidas ";
-            }else if (valEntSaida=="entrada") {
-                operacao=entradas;
-                titulo = "Valores das Entradas ";
-            }else if (valEntSaida=="tudo") {
-                operacao = entradas.concat(saidas);
-                //console.log(operacao);
-                titulo = "Entradas e Saídas"
-            }
-            
-            let strDivResultado="";
-            let strLinhas = "";
-            let soma = 0;
-            let somaEnt=0;
-            let somaSaida=0;   
-            let contTotal = operacao.length;
-            let cont = 1;
-            
-            
-            //console.log(total);
-            
-            operacao.forEach(dado => {
-                //console.log("entradas : " + dadoEntrada.desc);    
-                if (dado.tipo=="e") {
-                    somaEnt+= dado.valor;
-                } else if(dado.tipo=="s"){
-                    somaSaida+= dado.valor;
-                }
-                soma += dado.valor;
-                
-                strLinhas += `
-                
-                <tr>
-                    <td>${dado.data}</td><td>${dado.desc}</td>><th>${dado.tipo}</th><td>${dado.valor}</td>                    
-                </tr>
-                
-                `
-                if(cont==contTotal && valEntSaida=="tudo" ){
-                    strLinhas += `
-                
-                <tr>
-                    <td colspan='3' cla><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
-                </tr>
-                <tr>
-                    <td colspan='3' cla><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
-                </tr>
-                <tr>
-                    
-                    <td colspan='3' cla><center><b>Saldo </b><center></td><td><b>${somaEnt-somaSaida}</b></td>
-                  
-                </tr>
-                
-                `      
-                }else if(cont==contTotal && valEntSaida !="tudo"){
-                    strLinhas += `
-                
-                <tr>
-                    <td></td><td></td><td>Total</td><td><b>${soma}</b></td>                    
-                </tr>
-                
-                `    
-                }
-                cont++;
-            });
-
-            strDivResultado = `
-            <div class="container center col-md-8 col-sm-12 mt-3">    
-                <center>${titulo}</center><br>
-                <table class="table table-striped table-bordered" id="tabela">
-                    <tr class="table-primary">
-                        <th>Data</th><th>Descrição</th>><th>Tipo</th><th>Valor</th>
-                    </tr>
-                    <tb id="linhas">
-                        `+
-                        strLinhas
-                        +`
-                        
-                    </tb>
-
-                </table>
-                
-  
-            </div>
-            `;
-            
-            
-            
-            //document.querySelector('#linhas').innerHTML = strLinhas;
-            if (entradas.length>0 || saidas.length>0) {
-                document.getElementById("tabResultado").innerHTML = strDivResultado;    
-            }
-
-             
-                        
-        };
-
-        
-    </script>
-
+    <script src="./js/conta.js"></script>
     <title>Despesas Pessoais</title>
 </head>
 <body>
@@ -178,8 +23,8 @@
             <div class="form-group">
                 <label for="tipo">Tipo de movimentação</label>
                 <select class="form-control" name="tipo" id="tipo">
-                    <option value="e">Entrada</option>
-                    <option value="s">Saída</option>
+                    <option value="R">Entrada</option>
+                    <option value="D">Saída</option>
                 </select>
             </div>
             <div class="form-group">
@@ -187,10 +32,10 @@
                 <input class="form-control" type="text" id="valor" placeholder="digite o valor da movimentação">
             </div>            
             <div class=" col  form-group col-sm-12 align-justify">
-                <button class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
-                <button class="btn btn-primary" onclick="mostrar('entrada')">Entradas</button>
-                <button class="btn btn-primary" onclick="mostrar('saida')">Saídas</button>
-                <button class="btn btn-primary" onclick="mostrar('tudo')">Tudo</button>                
+                <button class="btn btn-success" onclick="controller.cadastrar()">Cadastrar</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                
             </div>  
     </div>
     <div class="container" id="tabResultado">
