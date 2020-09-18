@@ -82,6 +82,7 @@ class ControllerConta {
         }        
         this.gerenteConta.cadastrar(conta);
        //console.log(conta);
+       document.getElementById("btnExtrato").disabled = false;
        this.limparCampos();
     }
 
@@ -119,26 +120,41 @@ class ControllerConta {
         //console.log(total);
         
         operacao.forEach(dado => {           
+            if(dado.tipo=="D"){
+                strLinhas += `
             
-            strLinhas += `
+                    <tr class ="text-danger text-center">
+                        <td>${dado.data}</td>
+                        <td>${dado.desc}</td>
+                        <td>${dado.tipo}</td>
+                        <td>${dado.valor}</td>                    
+                    </tr>
             
-            <tr>
-                <td>${dado.data}</td><td>${dado.desc}</td>><th>${dado.tipo}</th><td>${dado.valor}</td>                    
-            </tr>
-            
-            `
+                `    
+            }else{
+                strLinhas += `
+                
+                <tr class="text-success text-center">
+                    <td>${dado.data}</td>
+                    <td>${dado.desc}</td>
+                    <td>${dado.tipo}</td>
+                    <td>${dado.valor}</td>                    
+                </tr>
+                
+                `
+            }
             if(cont==contTotal && valEntSaida=="tudo" ){
                 strLinhas += `
             
-            <tr>
-                <td colspan='3'><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
+            <tr class="text-center text-success">
+                <td colspan='3' ><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
             </tr>
-            <tr>
-                <td colspan='3'><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
+            <tr class="text-center text-danger">
+                <td colspan='3' ><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
             </tr>
-            <tr>
+            <tr class="text-center">
                 
-                <td colspan='3'><center><b>Saldo </b><center></td><td><b>${soma}</b></td>
+                <td colspan='3' ><center><b>Saldo </b><center></td><td><b>${soma}</b></td>
               
             </tr>
             
@@ -146,8 +162,8 @@ class ControllerConta {
             }else if(cont==contTotal && valEntSaida !="tudo"){
                 strLinhas += `
             
-            <tr>
-            <td colspan='3'><center><b>Total </b><center></td><td><b>${soma}</b></td>                    
+            <tr class="text-center">
+                <td colspan='3' ><center><b>Total </b><center></td><td><b>${soma}</b></td>                    
             </tr>
             
             `    
@@ -156,11 +172,20 @@ class ControllerConta {
         });
 
         strDivResultado = `
-        <div class="container center col-md-8 col-sm-12 mt-3">    
-            <center>${titulo}</center><br>
-            <table class="table table-striped table-bordered" id="tabela">
-                <tr class="table-primary">
-                    <th>Data</th><th>Descrição</th>><th>Tipo</th><th>Valor</th>
+        <div class="container center col-md-8 col-sm-12 mt-3">                
+            <div class=" col  form-group col-sm-12 align-justify">
+                <button class="btn btn-success" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
+                <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
+            </div>
+            <center class="alert alert-success mb-0"><b>${titulo}</b></center><br>
+            <table class="table table-striped table-bordered" id="tabela mt-0">
+                <tr class="table-primary text-center">
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
                 </tr>
                 <tb id="linhas">
                     `+
@@ -185,7 +210,22 @@ class ControllerConta {
          
                     
     };
+
+    mostrarExtrato(divEnt){
+        var display = document.getElementById(divEnt).style.display;;         
+        if(display == "none"){
+            document.getElementById(divEnt).style.display = 'block';
+            document.getElementById("tabResultado").style.display = 'none';
+        }else {
+            document.getElementById(divEnt).style.display = 'none';
+            document.getElementById("tabResultado").style.display = 'block';
+            controller.listarDados("tudo");
+        }
+            
+    };
 };
+
+
 
 
 var controller = new ControllerConta();

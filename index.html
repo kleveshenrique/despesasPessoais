@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <div class="container center col-md-8 col-sm-12 mt-3">    
+    <div class="container center col-md-8 col-sm-12 mt-3" id="telaCad">    
             <center><h3>Despesas Pessoais</h3></center>
             <hr>    
             <div class="form-group">
@@ -32,15 +32,13 @@
                 <input class="form-control" type="text" id="valor" placeholder="digite o valor da movimentação">
             </div>            
             <div class=" col  form-group col-sm-12 align-justify">
-                <button class="btn btn-success" onclick="controller.cadastrar()">Cadastrar</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                
+                <button class="btn btn-success" onclick="controller.cadastrar()">Cadastrar</button>                
+                <button id="btnExtrato" class="btn btn-primary" onclick="controller.mostrarExtrato('telaCad')" disabled>Extrato</button>                
             </div>  
     </div>
-    <div class="container" id="tabResultado">
+    <div class="container col" id="tabResultado">
         
-
+        
     </div>
        
 
