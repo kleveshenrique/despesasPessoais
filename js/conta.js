@@ -78,6 +78,7 @@ class ControllerConta {
             return false;
         }        
         this.gerenteConta.cadastrar(conta);
+        alert("Conta cadastrada com sucesso");
        //console.log(conta);
        document.getElementById("btnExtrato").disabled = false;
        this.limparCampos();
@@ -170,15 +171,16 @@ class ControllerConta {
 
         strDivResultado = `
         <div class="container center col-md-8 col-sm-12 mt-3"> 
-            <div class="row>               
+            <div class="row">               
                 <div class=" form-group col- col-sm-12 ">
-                    <button class="btn btn-success" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
+                    <button class="btn btn-primary" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
                     <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
                     <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
                     <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
                 </div>         
-            </div>  
-            <table class="table table-striped table-bordered" id="tabela">
+            </div> 
+            <hr> 
+            <table class="table table-striped table-bordered bt-0,5" id="tabela">
                 <tr class="text-success text-center">
                     <td colspan='4'><b>${titulo}</b></td>                    
                 </tr>
