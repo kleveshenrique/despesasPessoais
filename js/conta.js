@@ -62,10 +62,7 @@ class ControllerConta {
     exibirMensagem(strDados){
         document.getElementById("tabResultado").innerHTML = strDados;
 
-    } 
-    listarDados(){
-
-    }
+    }   
 
     limparCampos(){
         document.getElementById("data").value="";
@@ -172,15 +169,19 @@ class ControllerConta {
         });
 
         strDivResultado = `
-        <div class="container center col-md-8 col-sm-12 mt-3">                
-            <div class=" col  form-group col-sm-12 align-justify">
-                <button class="btn btn-success" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
-                <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
-            </div>
-            <center class="alert alert-success mb-0"><b>${titulo}</b></center><br>
-            <table class="table table-striped table-bordered" id="tabela mt-0">
+        <div class="container center col-md-8 col-sm-12 mt-3"> 
+            <div class="row>               
+                <div class=" form-group col- col-sm-12 ">
+                    <button class="btn btn-success" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
+                    <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
+                    <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
+                    <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
+                </div>         
+            </div>  
+            <table class="table table-striped table-bordered" id="tabela">
+                <tr class="text-success text-center">
+                    <td colspan='4'><b>${titulo}</b></td>                    
+                </tr>
                 <tr class="table-primary text-center">
                     <th>Data</th>
                     <th>Descrição</th>
