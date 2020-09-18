@@ -131,14 +131,14 @@ class ControllerConta {
                 strLinhas += `
             
             <tr>
-                <td colspan='3' cla><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
+                <td colspan='3'><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
             </tr>
             <tr>
-                <td colspan='3' cla><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
+                <td colspan='3'><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
             </tr>
             <tr>
                 
-                <td colspan='3' cla><center><b>Saldo </b><center></td><td><b>${soma}</b></td>
+                <td colspan='3'><center><b>Saldo </b><center></td><td><b>${soma}</b></td>
               
             </tr>
             
@@ -147,7 +147,7 @@ class ControllerConta {
                 strLinhas += `
             
             <tr>
-                <td></td><td></td><td>Total</td><td><b>${soma}</b></td>                    
+            <td colspan='3'><center><b>Total </b><center></td><td><b>${soma}</b></td>                    
             </tr>
             
             `    
