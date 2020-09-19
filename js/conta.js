@@ -173,10 +173,10 @@ class ControllerConta {
         <div class="container center col-md-8 col-sm-12 mt-3"> 
             <div class="row">               
                 <div class=" form-group col- col-sm-12 ">
-                    <button class="btn btn-primary" onclick="controller.mostrarExtrato('telaCad')">Novo</button>
-                    <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Receitas</button>
-                    <button class="btn btn-primary" onclick="controller.listarDados('saida')">Despesas</button>
-                    <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
+                    <button class="btn btn-primary p-1" onclick="controller.mostrarExtrato('telaCad')">Novo</button>
+                    <button class="btn btn-primary p-1" onclick="controller.listarDados('entrada')">Receitas</button>
+                    <button class="btn btn-primary p-1" onclick="controller.listarDados('saida')">Despesas</button>
+                    <button class="btn btn-primary p-1" onclick="controller.listarDados('tudo')">Tudo</button>                                
                 </div>         
             </div> 
             <hr> 
