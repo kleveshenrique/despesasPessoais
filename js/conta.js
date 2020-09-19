@@ -92,16 +92,16 @@ class ControllerConta {
         let somaSaida=0;
         if (valEntSaida=="saida") {
             operacao=this.gerenteConta.arrDespesas;
-            titulo = "Valores das Saidas ";
+            titulo = "Valores das Despesas ";
             soma = this.gerenteConta.obterSomaDespesas();
         }else if (valEntSaida=="entrada") {
             operacao=this.gerenteConta.arrReceitas;
-            titulo = "Valores das Entradas ";
+            titulo = "Valores das Receitas ";
             soma = this.gerenteConta.obterSomaReceitas();
         }else if (valEntSaida=="tudo") {
             operacao = this.gerenteConta.arrReceitas.concat(this.gerenteConta.arrDespesas);
             //console.log(operacao);
-            titulo = "Entradas e Saídas"
+            titulo = "Receitas e Despesas"
             somaEnt=this.gerenteConta.obterSomaReceitas();
             somaSaida=this.gerenteConta.obterSomaDespesas();
             soma = somaEnt - somaSaida;
@@ -145,14 +145,14 @@ class ControllerConta {
                 strLinhas += `
             
             <tr class="text-center text-success">
-                <td colspan='3' ><center><b>Total Entradas</b><center></td><td><b>${somaEnt}</b></td>               
+                <td colspan='3' ><center><b>Total Receitas</b><center></td><td><b>${somaEnt}</b></td>               
             </tr>
             <tr class="text-center text-danger">
-                <td colspan='3' ><center><b>Total Saídas</b><center></td><td><b>${somaSaida}</b></td>
+                <td colspan='3' ><center><b>Total Despesas</b><center></td><td><b>${somaSaida}</b></td>
             </tr>
             <tr class="text-center">
                 
-                <td colspan='3' ><center><b>Saldo </b><center></td><td><b>${soma}</b></td>
+                <td colspan='3' ><center><b>Saldo Total </b><center></td><td><b>${soma}</b></td>
               
             </tr>
             
@@ -161,7 +161,7 @@ class ControllerConta {
                 strLinhas += `
             
             <tr class="text-center">
-                <td colspan='3' ><center><b>Total </b><center></td><td><b>${soma}</b></td>                    
+                <td colspan='3' ><center><b>Saldo Total </b><center></td><td><b>${soma}</b></td>                    
             </tr>
             
             `    
@@ -173,9 +173,9 @@ class ControllerConta {
         <div class="container center col-md-8 col-sm-12 mt-3"> 
             <div class="row">               
                 <div class=" form-group col- col-sm-12 ">
-                    <button class="btn btn-primary" onclick="controller.mostrarExtrato('telaCad')">Voltar</button>
-                    <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Entradas</button>
-                    <button class="btn btn-primary" onclick="controller.listarDados('saida')">Saídas</button>
+                    <button class="btn btn-primary" onclick="controller.mostrarExtrato('telaCad')">Novo</button>
+                    <button class="btn btn-primary" onclick="controller.listarDados('entrada')">Receitas</button>
+                    <button class="btn btn-primary" onclick="controller.listarDados('saida')">Despesas</button>
                     <button class="btn btn-primary" onclick="controller.listarDados('tudo')">Tudo</button>                                
                 </div>         
             </div> 

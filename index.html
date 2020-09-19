@@ -10,7 +10,7 @@
 <body>
     
     <div class="container center col-md-8 col-sm-12 mt-3" id="telaCad">    
-           <div class="alert alert-primary" role="alert"> <center><h3>Despesas Pessoais</h3></center></div>
+           <div class="alert alert-primary" role="alert"> <center><h3>Controle Financeiro</h3></center></div>
             <hr>    
             <div class="form-group">
                 <label for="data">Data</label>
@@ -18,18 +18,18 @@
             </div>
             <div class="form-group">
                 <label for="desc">Descrição</label>
-                <input class="form-control" type="text" id="desc" placeholder="Digite a Descrição da movimentação">
+                <input class="form-control" type="text" id="desc" placeholder="Digite a Descrição">
             </div>
             <div class="form-group">
                 <label for="tipo">Tipo de movimentação</label>
                 <select class="form-control" name="tipo" id="tipo">
-                    <option value="R">Entrada</option>
-                    <option value="D">Saída</option>
+                    <option value="R">Receita</option>
+                    <option value="D">Despesa</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="valor">Valor</label>
-                <input class="form-control" type="text" id="valor" placeholder="digite o valor da movimentação">
+                <input class="form-control" type="text" id="valor" placeholder="digite o valor">
             </div>            
             <div class=" col  form-group col-sm-12 align-justify">
                 <button class="btn btn-success" onclick="controller.cadastrar()">Cadastrar</button>                
